@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const ejs = require('ejs');
 const app = express();
 /*
 const myLogger = (req, res, next) => {
@@ -8,21 +9,23 @@ const myLogger = (req, res, next) => {
 } 
 */
 
+//template engine 
+app.set("view engine", "ejs");
+
 //Middlewares
 //app.use(myLogger);
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-    
-    res.sendFile(path.resolve(__dirname, 'temp/index.html'))
+    res.render('index');
+})
 
-    /*const photo = {
-        id: 1,
-        name:"said photo",
-        description: "Photo desc"
-    }
-    res.send(photo);
-    */
+app.get('/about', (req, res) => {
+    res.render('about');
+})
+
+app.get('/add', (req, res) => {
+    res.render('add');
 })
 
 const port = 3000;
